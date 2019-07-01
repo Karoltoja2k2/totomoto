@@ -9,12 +9,35 @@ from .models import Offer, Images
 # Create your views here.
 
 def home(response):
-
-    return render(response, 'main/base.html', {})
+    if response.user.is_authenticated:
+        name = response.user
+    else:
+        name = 'niezalogowany użytkowniku'
+    return render(response, 'main/home.html', {"name":name})
 
 def bye(response):
     name = response.user
     return render(response, 'main/bye.html', {"name":name})
+
+def user_info(response):
+    user = response.user
+    print(user)
+    return render(response, 'main/user_info.html', {"user":user})
+
+def user_offs(response, name=None):
+    if name == None:
+        name = response.user
+        return render(response, 'main/home.html', {"name": name})
+    else:
+        user = name
+        li = []
+        for offer in Offer.objects.all():
+            b = '{}'.format(offer.user)
+            if b == user:
+                li += [offer]
+        print(li)
+        return render(response, 'main/user_offs.html', {"offers":li})
+
 
 def create(response):
     if response.user.is_authenticated:
@@ -59,16 +82,16 @@ def search(response):
     list = Offer.objects.all()
     return render(response, 'main/search.html', {"list":list})
 
-def uoffer(response, id=None):
+def your_offers(response, id=None):
     if response.user.is_authenticated:
         if id == None:
             list = response.user.offer.all()
             print(list)
-            return render(response, 'main/uoffer.html', {"list": list})
+            return render(response, 'main/your_offers.html', {"list": list})
         else:
             offer = Offer.objects.get(id=id)
             img = offer.images_set.all()
-            return render(response, 'main/eoffer.html', {"offer":offer, "images":img})
+            return render(response, 'main/edit_offer.html', {"offer":offer, "images":img})
     else:
         return render(response, 'main/notlogged.html', {})
 

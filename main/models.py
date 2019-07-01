@@ -21,3 +21,13 @@ class Offer(models.Model):
 class Images(models.Model):
     offer = models.ForeignKey(Offer, default=None, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='Images')
+
+
+class Userinf(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='userinf', null=True)
+    phone_num = models.IntegerField(null=True)
+    adress = models.CharField(max_length=50, null=True)
+
+
+
+
