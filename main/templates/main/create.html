@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}Nowa oferta{% endblock %}
+
+{% block content %}
+<h4>Stwórz ofertę</h4>
+
+<form method="post" action="#" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        {{form.as_p}}
+    </div>
+    <div>
+        {{iform.as_p}}
+    </div>
+    <div>
+        <button type="submit" name="save" class="btn btn-success">Dodaj ofertę</button>
+    </div>
+
+
+</form>
+
+{% endblock %}

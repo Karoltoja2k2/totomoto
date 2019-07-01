@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Wyszukiwarka {% endblock %}
+
+{% block content %}
+<h4>Wyszukiwarka</h4>
+
+{% for item in list %}
+    <div>
+        <a href="/{{item.id}}"> {{item.title}}
+    </div>
+
+{% endfor %}
+
+
+{% endblock %}
+

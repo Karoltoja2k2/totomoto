@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{offer.title}}{% endblock %}
+
+
+
+{% block content %}
+<h4>{{offer.title}}</h4>
+
+{% if offer.user == user %}
+    <a href="/uoffer/{{offer.id}}">Edit</a>
+{% endif %}
+
+<div>
+{% for img in images %}
+    <img src="{{img.image.url}}" width="500" height="500">
+{% endfor %}
+<h4>{{offer.price}}</h4>
+<h4>{{offer.mm}}</h4>
+    <h4>Created at: {{offer.created_at}}</h4>
+
+<h7>{{offer.user}}</h7>
+</div>
+
+
+{% endblock %}

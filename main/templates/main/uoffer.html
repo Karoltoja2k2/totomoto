@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Twoje oferty{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div>
+    {% for elem in list %}
+    <div><a href="/uoffer/{{elem.id}}">{{elem.title}}</div>
+
+    {% endfor %}
+
+</div>
+
+
+
+
+
+
+{% endblock %}
