@@ -20,9 +20,26 @@ def bye(response):
     return render(response, 'main/bye.html', {"name":name})
 
 def user_info(response):
-    user = response.user
-    print(user)
-    return render(response, 'main/user_info.html', {"user":user})
+
+
+    if response.user.is_authenticated:
+        user = response.user
+
+        if response.POST.get('edit'):
+            user.username = response.POST.get('username')
+            user.email = response.POST.get('email')
+            user.first_name = response.POST.get('first_name')
+            user.last_name = response.POST.get('last_name')
+
+            user.save()
+
+        return render(response, 'main/user_info.html', {"user": user})
+
+    else:
+        return render(response, 'main/notlogged.html', {})
+
+
+
 
 def user_offs(response, name=None):
     if name == None:
@@ -62,7 +79,9 @@ def create(response):
                         photo = Images(offer=r, image=image)
                         photo.save()
 
-            return HttpResponseRedirect('/%i' % r.id)
+                return HttpResponseRedirect('/%i' % r.id)
+
+            return render(response, 'main/create.html', {"form": form, "iform": formset})
 
         else:
             form = NewOffer
@@ -89,9 +108,20 @@ def your_offers(response, id=None):
             print(list)
             return render(response, 'main/your_offers.html', {"list": list})
         else:
+
             offer = Offer.objects.get(id=id)
             img = offer.images_set.all()
-            return render(response, 'main/edit_offer.html', {"offer":offer, "images":img})
+
+            if response.method == 'POST':
+                if response.POST.get('del'):
+                    img.delete()
+                    offer.delete()
+
+                if response.POST.get('edit'):
+
+                    return HttpResponseRedirect('/uoffer')
+
+            return render(response, 'main/edit_offer.html', {"images":img, "offer":offer})
     else:
         return render(response, 'main/notlogged.html', {})
 

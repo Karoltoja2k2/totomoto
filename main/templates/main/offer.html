@@ -3,8 +3,8 @@
 {% block title %}{{offer.title}}{% endblock %}
 
 
-
 {% block content %}
+
 <h4>{{offer.title}}</h4>
 
 {% if offer.user == user %}
@@ -15,8 +15,22 @@
 {% for img in images %}
     <img src="{{img.image.url}}" width="500" height="500">
 {% endfor %}
-<h4>{{offer.price}}</h4>
-<h4>{{offer.mm}}</h4>
+
+
+
+<h4>
+    {{offer.mm}}
+
+    {% if offer.accident == True %}
+        Bezwypadkowy
+    {% elif offer.accdient == None %}
+        Wypadkowość nieznana
+    {% else %}
+        Powypadkowy
+    {% endif %}
+
+</h4>
+
     <h4>Created at: {{offer.created_at}}</h4>
 
 <h7>

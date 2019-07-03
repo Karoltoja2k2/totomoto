@@ -5,17 +5,24 @@
 
 
 {% block content %}
-<h4>{{offer.title}}</h4>
+<form method="post" action="#">
+    {% csrf_token %}
+
+    <p>Tytuł <Input value="{{offer.title}}" name="title"></p>
+
+    <p>Opis <Input value="{{offer.dsc}}" name="dsc"></p>
+
+{% for img in images %}
+    <p>{{img.image.url}}</p>
+{% endfor %}
+
+
 
 <div>
-{% for img in images %}
-    <img src="{{img.image.url}}" width="500" height="500">
-{% endfor %}
-<h4>{{offer.price}}</h4>
-<h4>{{offer.mm}}</h4>
-
-<h7>{{offer.user}}</h7>
+    <button type="submit" name="del" value="del" class="btn btn-danger">Usuń ofertę</button>
+    <button type="submit" name="edit" value="edit" class="btn btn-success">Zapisz zmiany</button>
 </div>
 
+</form>
 
 {% endblock %}

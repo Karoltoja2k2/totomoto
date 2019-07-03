@@ -5,12 +5,20 @@
 
 {% block content %}
 
+<form method="post" action="#">
+    {% csrf_token %}
 
-<div>
-    <p>{{user.username}}</p>
-    <p>{{user.email}}</p>
-    <p>{{user.password}}</p>
-</div>
+    <div>
+
+        <p>Nazwa użytkownika <Input value="{{user.username}}" name="username"></p>
+        <p>Email <Input value="{{user.email}}" name="email"></p>
+        <p>Imię <Input value="{{user.first_name}}" name="first_name"></p>
+        <p>Nazwisko <Input value="{{user.last_name}}" name="last_name"></p>
+
+        <button type="submit" name="edit" value="edit" class="btn btn-success">Zapisz zmiany</button>
+    </div>
+
+</form>
 
 
 
