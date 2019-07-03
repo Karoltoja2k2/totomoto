@@ -104,9 +104,9 @@ def search(response):
 def your_offers(response, id=None):
     if response.user.is_authenticated:
         if id == None:
-            list = response.user.offer.all()
+            offers = response.user.offer.all()
             print(list)
-            return render(response, 'main/your_offers.html', {"list": list})
+            return render(response, 'main/your_offers.html', {"offers": offers})
         else:
 
             offer = Offer.objects.get(id=id)
