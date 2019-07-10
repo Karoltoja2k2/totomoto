@@ -3,12 +3,13 @@
 {% block title %}{{offer.title}}{% endblock %}
 
 
+
 {% block content %}
 
 <h4>{{offer.title}}</h4>
 
 {% if offer.user == user %}
-    <a href="/uoffer/{{offer.id}}">Edit</a>
+    <a href="/edit/{{offer.id}}">Edit</a>
 {% endif %}
 
 <div>
@@ -19,7 +20,7 @@
 
 
 <h4>
-    {{offer.model}}
+    {{offer.marka}} {{offer.model}} kategoria {{offer.category}}
 
     {% if offer.accident == True %}
         Bezwypadkowy

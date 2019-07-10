@@ -8,9 +8,10 @@ urlpatterns = [
     path('<int:id>', views.offer, name='offer'),
     path('create/', views.create, name='create'),
     path('search/', views.search, name='search'),
+    path('user/', views.user_offs, name='user_offs'),
     path('user/<str:name>/', views.user_offs, name='user_offs'),
+    path('edit/<int:id>/', views.edit_offer, name='edit_offer'),
     path('user_info/', views.user_info, name='user_info'),
-    path('uoffer/', views.your_offers, name='uoffer'),
-    path('uoffer/<int:id>', views.your_offers, name='uoffer'),
+
     path('bye/', views.bye, name='bye'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -2,8 +2,11 @@ from django.shortcuts import render
 from django.forms import modelformset_factory
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import NewOffer, ImageForm
+from django.db.models import Q
+from .forms import NewOffer, ImageForm, SearchOff
 from .models import Offer, Images
+from .models import Category, CarMark, Stan, Status, Type, Fuel, GearBox, Naped
+from .choices import *
 
 
 # Create your views here.
@@ -13,7 +16,16 @@ def home(response):
         name = response.user
     else:
         name = 'niezalogowany użytkowniku'
-    return render(response, 'main/home.html', {"name":name})
+
+    list = Offer.objects.order_by('created_at')
+    offers = list.reverse()[:6]
+
+    for offer in offers:
+        print(offer.images_set.all())
+
+    i = 1
+
+    return render(response, 'main/home.html', {"name":name, "offers":offers, "i":i})
 
 def bye(response):
     name = response.user
@@ -42,9 +54,14 @@ def user_info(response):
 
 
 def user_offs(response, name=None):
+
     if name == None:
+
+        offers = Offer.objects.all()
+
         name = response.user
-        return render(response, 'main/home.html', {"name": name})
+        return render(response, 'main/user_offs.html', {"offers": offers})
+
     else:
         user = name
         li = []
@@ -53,7 +70,8 @@ def user_offs(response, name=None):
             if b == user:
                 li += [offer]
         print(li)
-        return render(response, 'main/user_offs.html', {"offers":li})
+
+        return render(response, 'main/user_offs.html', {"offers":li, "user":user, "response":response})
 
 
 def create(response):
@@ -67,10 +85,14 @@ def create(response):
             formset = ImageFormSet(response.POST, response.FILES,
                                    queryset=Images.objects.none())
 
+
+
             if form.is_valid() and formset.is_valid():
                 r = form.save(commit=False)
                 r.user = response.user
                 r.save()
+
+
 
                 for form in formset.cleaned_data:
                     print(form)
@@ -81,12 +103,16 @@ def create(response):
 
                 return HttpResponseRedirect('/%i' % r.id)
 
-            return render(response, 'main/create.html', {"form": form, "iform": formset})
+            return render(response, 'main/create.html', {"form": form,
+                                                         "iform": formset,
+                                                         })
 
         else:
             form = NewOffer
             formset = ImageFormSet(queryset=Images.objects.none())
-            return render(response, 'main/create.html', {"form": form, "iform":formset})
+            return render(response, 'main/create.html', {"form": form,
+                                                         "iform":formset,
+                                                         })
     else:
         return render(response, 'main/notlogged.html', {})
 
@@ -95,21 +121,61 @@ def offer(response, id):
     offer = Offer.objects.get(id=id)
     img = offer.images_set.all()
 
-    return render(response, 'main/offer.html', {"offer":offer, "images":img})
+    print(img)
+
+
+
+    return render(response, 'main/offer.html', {"offer":offer,
+                                                "images":img,
+
+                                                })
 
 def search(response):
-    list = Offer.objects.all()
-    return render(response, 'main/search.html', {"list":list})
 
-def your_offers(response, id=None):
+    list = Offer.objects.order_by('price')
+    marki = []
+
+    if response.method == "GET":
+        form = SearchOff(response.GET)
+
+        if response.GET.get('addmark'):
+            marki += response.GET.get('marka')
+
+
+        if response.GET.get('search'):
+
+            print(marki)
+
+            rsp = response.GET.getlist('fuel')
+            if len(rsp) != 0:
+                ifuel = [FUEL[int(rsp[i])-1][1] for i in range(len(rsp))]
+                print(ifuel)
+                if ifuel:
+                    list = list.filter(fuel__in=ifuel)
+
+            if len(marki) != 0:
+
+                marka = [CarMark.objects.get(id=i) for i in marki]
+                list = list.filter(marka__in=marka)
+
+
+
+            return render(response, 'main/search.html', {"list": list, "form": form})
+
+
+    else:
+        form = SearchOff
+
+    return render(response, 'main/search.html', {"list": list, "form": form})
+
+
+
+def edit_offer(response, id=None):
     if response.user.is_authenticated:
-        if id == None:
-            offers = response.user.offer.all()
-            print(list)
-            return render(response, 'main/your_offers.html', {"offers": offers})
-        else:
 
-            offer = Offer.objects.get(id=id)
+
+        offer = Offer.objects.get(id=id)
+        if offer.user == response.user:
             img = offer.images_set.all()
 
             if response.method == 'POST':
@@ -117,11 +183,13 @@ def your_offers(response, id=None):
                     img.delete()
                     offer.delete()
 
-                if response.POST.get('edit'):
-
-                    return HttpResponseRedirect('/uoffer')
 
             return render(response, 'main/edit_offer.html', {"images":img, "offer":offer})
+
+        else:
+            return render(response, 'main/notlogged.html', {})
+
+
     else:
         return render(response, 'main/notlogged.html', {})
 

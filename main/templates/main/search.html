@@ -4,10 +4,15 @@
 
 {% block content %}
 <h4>Wyszukiwarka</h4>
+<form method="GET">
+    {{form.as_p}}
+    <input type="Submit" name="addmark" value="Dodaj marke">
+    <input type="Submit" name="search" value="search">
 
+</form>
 {% for item in list %}
     <div>
-        <a href="/{{item.id}}"> {{item.title}}
+        <a href="/{{item.id}}"> {{item.title}} </a> {{item.price}}
     </div>
 
 {% endfor %}

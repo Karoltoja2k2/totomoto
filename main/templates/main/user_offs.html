@@ -4,10 +4,23 @@
 
 
 {% block content %}
+
+<h4>Oferty użytkownika {{user}}</h4>
+
 <div>
+    {% if response.user == user %}
+
     {% for off in offers %}
-    <p><a href="/{{off.id}}">{{off.title}}</a></p>
+        <p><a href="/{{off.id}}">{{off.title}}</a></p>
     {% endfor %}
+
+    {% else %}
+
+    {% for off in offers %}
+        <p><a href="/{{off.id}}">{{off.title}}</a></p>
+    {% endfor %}
+
+    {% endif %}
 
 
 </div>

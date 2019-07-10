@@ -7,7 +7,64 @@
 
 
 <div>
-    Witaj {{name}}!
+    <div class="hero">
+        <!-- tu jest tlo -->
+    </div>
+
+    <div class="hero-container">
+        <div class="hero-header">
+            <h1 class="hero-title">
+                Siema gościu!
+            </h1>
+            <!-- <p class="hero-description">
+                Tu jakieś pierdolenie co to za stronka, zeby zapelnic czyms puste pole XD No i grafika w sumie moze do
+                zmiany.
+            </p> -->
+            <a href="/search">
+                <button class="hero-button">
+                    Wyszukaj se szrota
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <div class="offers-container">
+        <div class="offers-header">
+            <h4 class="offers-title">
+                Polecane oferty
+            </h4>
+            <p class="offers-description">
+                Zobacz wszystkie
+            </p>
+        </div>
+        {% for offer in offers %}
+
+            <div class="offer offer{{forloop.counter}}">
+                <div class="offer-img-container">
+                    {% if offer.get_first_image.image.url %}
+                    <img class="offer-img" src="{{offer.get_first_image.image.url}}" alt="offer1">
+                    {% else %}
+                    <img class="offer-img" src="/media/static/img/no-photo.png" alt="offer1">
+                    {% endif %}
+                </div>
+                <div class="offer-label label1">
+                    <div class="offer-details">
+                        <h4 class="offer-name">
+                            {{offer.title}}
+                        </h4>
+                        <p class="offer-specs">
+                            {{offer.prod_year}} | {{offer.mileage}}km | {{offer.power}}KM | {{offer.fuel}}
+                        </p>
+                    </div>
+                    <div class="offer-price">
+                        {{offer.price}} PLN
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
 </div>
 
 

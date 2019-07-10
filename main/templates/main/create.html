@@ -8,12 +8,17 @@
 
 <form method="post" action="#" enctype="multipart/form-data">
     {% csrf_token %}
-    <div>
-        {{form.as_p}}
-    </div>
+
+    <div></div>
+
+{{form.as_p}}
+
+
+
     <div>
         {{iform.as_p}}
     </div>
+
     <div>
         <button type="submit" name="save" class="btn btn-success">Dodaj ofertę</button>
     </div>
