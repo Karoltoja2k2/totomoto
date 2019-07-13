@@ -1,0 +1,162 @@
+.offers-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 140px;
+    grid-row-gap: 40px;
+    /* padding-left: 100px;
+    padding-right: 100px; */
+    align-self: center;
+    justify-self: center;
+    background: #EFF2F9;
+    border-radius: 60px;
+    z-index: -99;
+}
+
+.offers-header {
+    margin-right: 200px;
+    margin-bottom: 20px;
+    height: 120px;
+    grid-column: 1;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    justify-self: end;
+}
+
+.offers-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 28px;
+    padding-right: 20px;
+    align-self: flex-end;
+    justify-self: center;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.small {
+    font-size: 16px;
+    font-weight: 500;
+    color: #7c7c7c;
+}
+
+.offers-title:hover {
+    color: rgb(214, 46, 68);
+}
+
+.offers-description {
+    grid-column: 1;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #7c7c7c;
+    align-self: flex-end;
+    justify-self: center;
+    padding-bottom: 5px;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.offers-description:hover {
+    font-weight: bold;
+    font-size: 28px;
+    color: rgb(214, 46, 68);
+}
+
+.offer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-self: center;
+    margin-bottom: 140px;
+    width: 600px;
+    height: 340px;
+    z-index: 1;
+    cursor: pointer;
+    /* border: 3px solid rgb(55, 196, 97); */
+}
+
+.offer-img-container {
+    position: relative;
+    width: 600px;
+    height: 340px;
+    /* border: 3px solid red; */
+}
+
+.offer-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    z-index: 1;
+    object-fit: cover;
+    box-shadow: 0 35px 30px -30px rgb(0, 0, 0);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.offer-img:hover {
+    transform: scale(1.005);
+    box-shadow: 0 40px 30px -30px rgb(0, 0, 0);
+}
+
+.offer:hover .offer-img {
+    transform: scale(1.005);
+    box-shadow: 0 40px 30px -30px rgb(0, 0, 0);
+}
+
+.offer:hover .offer-label {
+    top: 235px;
+}
+
+.offer-label {
+    position: absolute;
+    top: 230px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    height: 200px;
+    background: rgb(255, 255, 255);
+    border-radius: 30px;
+    padding: 130px 30px 20px 30px;
+    transition: all 0.3s;
+    /* border: 3px solid blue; */
+    z-index: -2;
+}
+
+.offer-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    color: #000000;
+}
+
+.offer-specs {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #505050;
+}
+
+.offer-price {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 36px;
+    color: #A50044;
+}
+
+
+.offer1,
+.offer3,
+.offer5 {
+    grid-column: 1;
+    justify-self: end;
+}
+
+.offer2,
+.offer4,
+.offer6 {
+    grid-column: 2;
+    justify-self: start;
+}
