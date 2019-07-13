@@ -4,9 +4,6 @@ from .models import Offer, Images
 from .models import Category, CarMark, Stan, Status, Type, Fuel, GearBox, Naped
 import datetime
 from .choices import *
-from multiselectfield import MultiSelectField
-
-
 
 today = datetime.date.today().year
 
@@ -48,7 +45,7 @@ class NewOffer(ModelForm):
         #}
 
 class SearchOff(forms.Form):
-    category = forms.ModelChoiceField(queryset=Category.objects.all(), label='Kategoria', required=False)
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), required=False)
     marka = forms.ModelChoiceField(queryset=CarMark.objects.all(), required=False)
     model = forms.CharField(max_length=30, required=False)
     type = forms.MultipleChoiceField(choices=TYPE, widget=forms.CheckboxSelectMultiple(), required=False)
@@ -65,11 +62,14 @@ class SearchOff(forms.Form):
     price_max = forms.IntegerField(required=False)
 
 
+
+
+
+
     class Meta:
         model = Offer
         fields = (
                   )
-
 
 class ImageForm(ModelForm):
 

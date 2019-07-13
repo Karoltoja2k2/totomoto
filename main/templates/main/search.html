@@ -4,25 +4,20 @@
 
 {% block content %}
 
+{% load widget_tweaks %}
 
 <form method="GET">
 
+{% for field in form.visible_fields %}
+      <div class="group">
+        <label  for="{{ field.id_for_label }}">{{ field.label }}</label>
+          <div class="text">{{ field }}</div>
+      </div>
+    {% endfor %}
 
-kategoria {{form.category}}
-marka {{form.marka}}
-model {{form.model}}
-typ {{form.type}}
-stan {{form.stan}}
-rok produkcji od {{form.prod_year_min}}
-do {{form.prod_year_max}}
-przebieg od {{form.mileage_min}}
-do {{form.mileage_max}}
-pojemnosc od {{form.cap_min}}
-do {{form.cap_max}}
-rodzaj paliwa {{form.fuel}}
-cena od {{form.price_min}}
-do {{form.price_max}}
 
+
+</p>
     <input type="Submit" name="search" value="search">
 
 </form>

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'main.apps.MainConfig',
     'register.apps.RegisterConfig',
-    'multiselectfield',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

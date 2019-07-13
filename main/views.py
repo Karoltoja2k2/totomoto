@@ -141,6 +141,7 @@ def search(response):
     if response.method == "GET":
         form = SearchOff(response.GET)
 
+        print(form)
         if response.GET.get('search'):
 
 

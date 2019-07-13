@@ -1,16 +1,18 @@
 <!doctype html>
 
 <html>
+
 <head>
 
     <link rel="stylesheet" type="text/css" href="/media/static/style/base.css">
     <link rel="stylesheet" type="text/css" href="/media/static/style/nav.css">
     <link rel="stylesheet" type="text/css" href="/media/static/style/header.css">
+    <link rel="stylesheet" type="text/css" href="/media/static/style/offers.css">
 
 
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -19,8 +21,7 @@
 </head>
 
 <body>
-{% block nav %}
-    <nav>
+    <nav class="navbar">
         <div class="logo">
             <a href="/">
                 <img alt="toTOmoto" src="/media/static/img/logo.png">
@@ -33,23 +34,24 @@
             <li><a href="/user">Twoje oferty</a></li>
             <li><a href="/user_info">Profil</a></li>
 
-            <!-- {% if user.is_authenticated %} -->
+            {% if user.is_authenticated %}
             <li>
                 <a href="/logout"><button class="red-btn">Wyloguj się</button></a>
             </li>
-            <!-- {% else %} -->
+            {% else %}
             <li>
                 <a href="/login"><button class="red-btn">Zaloguj się</button></a>
             </li>
-            <!-- {% endif %} -->
+            {% endif %}
         </ul>
     </nav>
-{% endblock %}
 
-                    {% block content %}
-                    {% endblock %}
+    {% block content %}
 
-<script src="/media/static/js/animations.js"></script>
+    {% endblock %}
+
+    <script src="/media/static/js/offer-header.js"></script>
+    <script src="/media/static/js/navbar.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
@@ -60,8 +62,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-
-    <script src="/media/static/js/navbar.js"></script>
-
 </body>
+
 </html>
