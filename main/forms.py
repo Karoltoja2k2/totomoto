@@ -48,21 +48,21 @@ class NewOffer(ModelForm):
         #}
 
 class SearchOff(forms.Form):
-    #category = forms.ModelChoiceField(queryset=Category.objects.all(), label='Kategoria', required=False)
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), label='Kategoria', required=False)
     marka = forms.ModelChoiceField(queryset=CarMark.objects.all(), required=False)
-    #model = forms.CharField(max_length=30, required=False)
-    #type = forms.ModelChoiceField(queryset=Type.objects.all(), required=False)
+    model = forms.CharField(max_length=30, required=False)
+    type = forms.MultipleChoiceField(choices=TYPE, widget=forms.CheckboxSelectMultiple(), required=False)
 
-    # stan = forms.ModelChoiceField(queryset=Stan.objects.all(), required=False)
-    # prod_year_min = forms.IntegerField(required=False)
-    # prod_year_max = forms.IntegerField(required=False)
-    # mileage_min = forms.IntegerField(required=False)
-    # mileage_max = forms.IntegerField(required=False)
-    # cap_min = forms.IntegerField(required=False)
-    # cap_max = forms.IntegerField(required=False)
+    stan = forms.MultipleChoiceField(choices=STAN, widget=forms.CheckboxSelectMultiple(), required=False)
+    prod_year_min = forms.IntegerField(required=False)
+    prod_year_max = forms.IntegerField(required=False)
+    mileage_min = forms.IntegerField(required=False)
+    mileage_max = forms.IntegerField(required=False)
+    cap_min = forms.IntegerField(required=False)
+    cap_max = forms.IntegerField(required=False)
     fuel = forms.MultipleChoiceField(choices=FUEL, widget=forms.CheckboxSelectMultiple(), required=False)
-    #price_min = forms.IntegerField(required=False)
-    #price_max = forms.IntegerField(required=False)
+    price_min = forms.IntegerField(required=False)
+    price_max = forms.IntegerField(required=False)
 
 
     class Meta:

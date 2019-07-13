@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/media/static/style/base.css">
     <link rel="stylesheet" type="text/css" href="/media/static/style/nav.css">
     <link rel="stylesheet" type="text/css" href="/media/static/style/header.css">
-    <link rel="stylesheet" type="text/css" href="/media/static/style/offers.css">
+
 
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
@@ -19,6 +19,7 @@
 </head>
 
 <body>
+{% block nav %}
     <nav>
         <div class="logo">
             <a href="/">
@@ -43,9 +44,9 @@
             <!-- {% endif %} -->
         </ul>
     </nav>
+{% endblock %}
 
                     {% block content %}
-
                     {% endblock %}
 
 <script src="/media/static/js/animations.js"></script>
@@ -59,5 +60,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+
+    <script src="/media/static/js/navbar.js"></script>
+
 </body>
 </html>

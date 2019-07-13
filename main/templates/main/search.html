@@ -3,13 +3,30 @@
 {% block title %} Wyszukiwarka {% endblock %}
 
 {% block content %}
-<h4>Wyszukiwarka</h4>
+
+
 <form method="GET">
-    {{form.as_p}}
-    <input type="Submit" name="addmark" value="Dodaj marke">
+
+
+kategoria {{form.category}}
+marka {{form.marka}}
+model {{form.model}}
+typ {{form.type}}
+stan {{form.stan}}
+rok produkcji od {{form.prod_year_min}}
+do {{form.prod_year_max}}
+przebieg od {{form.mileage_min}}
+do {{form.mileage_max}}
+pojemnosc od {{form.cap_min}}
+do {{form.cap_max}}
+rodzaj paliwa {{form.fuel}}
+cena od {{form.price_min}}
+do {{form.price_max}}
+
     <input type="Submit" name="search" value="search">
 
 </form>
+
 {% for item in list %}
     <div>
         <a href="/{{item.id}}"> {{item.title}} </a> {{item.price}}

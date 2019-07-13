@@ -130,33 +130,85 @@ def offer(response, id):
 
                                                 })
 
+
+
 def search(response):
 
+
     list = Offer.objects.order_by('price')
-    marki = []
+    marka = []
 
     if response.method == "GET":
         form = SearchOff(response.GET)
 
-        if response.GET.get('addmark'):
-            marki += response.GET.get('marka')
-
-
         if response.GET.get('search'):
 
-            print(marki)
 
-            rsp = response.GET.getlist('fuel')
-            if len(rsp) != 0:
-                ifuel = [FUEL[int(rsp[i])-1][1] for i in range(len(rsp))]
+
+            category = response.GET.get('category')
+            if category:
+                category = [Category.objects.get(id=i) for i in category]
+                list = list.filter(category__in=category)
+
+            marka = response.GET.get('marka')
+            if marka:
+                marka = [CarMark.objects.get(id=i) for i in marka]
+                list = list.filter(marka__in=marka)
+
+            model = response.GET.get('model')
+            if model:
+                list = list.filter(model__icontains=model)
+
+            type = response.GET.getlist('type')
+            if len(type) != 0:
+                itype = [TYPE[int(type[i])-1][1] for i in range(len(type))]
+                if itype:
+                    list = list.filter(type__in=itype)
+
+            stan = response.GET.getlist('stan')
+            if len(stan) != 0:
+                istan = [STAN[int(stan[i]) - 1][1] for i in range(len(stan))]
+                if istan:
+                    list = list.filter(stan__in=istan)
+
+            min_prod = response.GET.get('prod_year_min')
+            if min_prod:
+                list = list.filter(prod_year__gte=min_prod)
+
+            max_prod = response.GET.get('prod_year_max')
+            if max_prod:
+                list = list.filter(prod_year__lte=max_prod)
+
+            min_mileage = response.GET.get('mileage_min')
+            if min_mileage:
+                list = list.filter(mileage__gte=min_mileage)
+
+            max_mileage = response.GET.get('mileage_max')
+            if max_mileage:
+                list = list.filter(mileage__lte=max_mileage)
+
+            min_cap = response.GET.get('cap_min')
+            if min_cap:
+                list = list.filter(cap__gte=min_cap)
+
+            max_cap = response.GET.get('cap_max')
+            if max_cap:
+                list = list.filter(cap__lte=max_cap)
+
+            fuel = response.GET.getlist('fuel')
+            if len(fuel) != 0:
+                ifuel = [FUEL[int(fuel[i])-1][1] for i in range(len(fuel))]
                 print(ifuel)
                 if ifuel:
                     list = list.filter(fuel__in=ifuel)
 
-            if len(marki) != 0:
+            price_min = response.GET.get('price_min')
+            if price_min:
+                list = list.filter(price__gte=price_min)
 
-                marka = [CarMark.objects.get(id=i) for i in marki]
-                list = list.filter(marka__in=marka)
+            price_max = response.GET.get('price_max')
+            if price_max:
+                list = list.filter(price__lte=price_max)
 
 
 
